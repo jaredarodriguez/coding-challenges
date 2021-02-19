@@ -6,16 +6,6 @@ Notice that the solution set must not contain duplicate triplets.
 
 */
 
-// [-1, 0, 1, 2, -1, 4]
-// tripSumArr = push(i, j, k)
-// it 1
-// i = 0; j = 1; k = 2;
-// 1, 0, 1
-// 1, 0, -1
-// 1, 0, 4
-// i = 1; j = 2, k = 3
-// 0, 1, 3
-
 function threeSum(arr) {
   arr.sort((a, b) => a - b)
   let tripSum = []
