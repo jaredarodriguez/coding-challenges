@@ -53,21 +53,21 @@ var isPermuationMap = (str1, str2) => {
   console.log(result)
 }
 
-// // using ASCII values to compare
-// var isPermutationASCII = (str1, str2) => {
-//   // check base case
-//   if (str1.length !== str2.length) {
-//     return false
-//   }
-//   //   obtain ASCII val
-//   let ASCIIval = (str) => {
-//     let count = 0
-//     for (let i = 0; i < str.length; i++) {
-//       count += str.charCodeAt(str[i])
-//     }
-//     return count
-//   }
-//   console.log(ASCIIval(str1), ASCIIval(str2))
-// }
+// using ASCII values to compare
+var isPermutationASCII = (str1, str2) => {
+  if (str1.length !== str2.length) {
+    return false
+  }
+  //   obtain ASCII val
+  let ASCIIval = (str) => {
+    let count = 0
+    for (let i = 0; i < str.length; i++) {
+      let charVal = str.charCodeAt(i)
+      count += charVal
+    }
+    return count
+  }
+  console.log(ASCIIval(str1), ASCIIval(str2))
+}
 
-// console.log(isPermutationASCII('earf', 'fear'))
+console.log(isPermutationASCII('earf', 'fear'))
