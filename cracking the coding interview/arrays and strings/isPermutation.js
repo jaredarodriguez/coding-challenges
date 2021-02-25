@@ -67,7 +67,7 @@ var isPermutationASCII = (str1, str2) => {
     }
     return count
   }
-  console.log(ASCIIval(str1), ASCIIval(str2))
+  return ASCIIval(str1) === ASCIIval(str2)
 }
 
-console.log(isPermutationASCII('earf', 'fear'))
+console.log(isPermutationASCII('jared', 'molly'))
