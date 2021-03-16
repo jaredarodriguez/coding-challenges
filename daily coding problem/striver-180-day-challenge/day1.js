@@ -80,4 +80,35 @@ var sort = (arr) => {
   return arr
 }
 
-console.log(countingSort([0, 2, 2, 1, 2, 0, 1]))
+/* Repeat and Missing Number 
+
+Given an unsorted array of size n. Array elements are in the range from 1 to n. One number from set {1, 2, ...n} is missing and one number occurs twicein the array. Find these two numbers
+ 
+*/
+
+function repeatAndMissing(arr) {
+  let numMap = {}
+  let missingNum
+  let repeatedNum
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!numMap[arr[i]]) {
+      numMap[arr[i]] = 1
+    } else {
+      numMap[arr[i]] += 1
+    }
+  }
+
+  for (let j = 0; j < arr.length; j++) {
+    if (!numMap[j]) {
+      missingNum = j
+    }
+
+    if (numMap[j] > 1) {
+      repeatedNum = j
+    }
+  }
+  console.log(`Missing = ${missingNum}, Repeating = ${repeatedNum}`)
+}
+
+repeatAndMissing([4, 3, 6, 2, 1, 1])
