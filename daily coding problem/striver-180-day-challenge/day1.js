@@ -86,6 +86,7 @@ Given an unsorted array of size n. Array elements are in the range from 1 to n. 
  
 */
 
+// hash map approach => Time : O(2N), Space : O(N)
 function repeatAndMissing(arr) {
   let numMap = {}
   let missingNum
@@ -112,3 +113,40 @@ function repeatAndMissing(arr) {
 }
 
 repeatAndMissing([4, 3, 6, 2, 1, 1])
+
+/* Merge two sorted arrays with 0(1) extra space
+
+We are given two sorted arrays. We need to merge these two arrays such that the initial numbers (after complete sorting) are in the first array and the remaining numbers are in the second array.
+
+Input: [10], [2, 3]
+Output: [2], [3, 10]
+
+Input: 
+
+[1, 2,  3,  5, 8, 9]               
+               i
+[20, 15,  10,  13]                  
+
+
+Output: [1, 2, 3, 5, 8, 9], [10, 13, 15, 20]
+*/
+
+// Brute force solution
+function mergeArr(arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] > arr2[j]) {
+        let temp = arr1[i]
+        let otherTemp = arr2[j]
+        arr1[i] = temp
+        arr2[j] = otherTemp
+        break
+      }
+    }
+  }
+  arr2.sort()
+
+  return `arr1: ${arr1}, arr2: ${arr2}`
+}
+
+console.log(mergeArr([1, 2, 3, 5, 8, 9], [20, 15, 10, 13]))
