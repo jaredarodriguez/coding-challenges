@@ -15,7 +15,7 @@ Input: [0,  1,  2,  0,  1,  0,  1,  2,  2]
 Output: [0, 0, 1, 2, 2]
 */
 
-// counting sort
+// counting sort => Time O(n log n) Space: 0(N)
 var countingSort = (arr) => {
   let zeroCount = 0
   let oneCount = 0
