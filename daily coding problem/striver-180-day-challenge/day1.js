@@ -192,7 +192,7 @@ Explanation: [4, -1, 2, 1] has the largest sum = 6
 
 */
 
-// Brute force solution => Time: O(2n) Space O(1)
+// Brute force solution => Time: O(2n) Space: O(1)
 function maxSum(arr) {
   let sp = 0
   let fp = 1
@@ -214,6 +214,7 @@ function maxSum(arr) {
   return maxSum
 }
 
+// Kadane's algo => Time: O(n) Space: O(1)
 function maxKadaneSum(arr) {
   let sum = 0
   let maxSum = arr[0]
