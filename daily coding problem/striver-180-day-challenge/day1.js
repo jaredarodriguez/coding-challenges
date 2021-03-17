@@ -230,4 +230,47 @@ function maxKadaneSum(arr) {
   return maxSum
 }
 
-console.log(maxKadaneSum([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+// console.log(maxKadaneSum([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+
+/* Merge Intervals
+
+Given a collection of intervals, merge all overlapping intervals
+
+Example 1: 
+
+Input: [[1,3], [2,6], [8,10], [15,18]]
+Output: [[1,6], [8,10], [15,18]]
+Explanation: Since intervals [1,3] and [2,6 overlaps], merge them into [1,6]
+
+*/
+
+// iterate through 2d array comparing last index of index iteration to first index of indexes
+// if indexed iteration is >= first index of indexes
+// combine indexes
+// splice the two arrays from the array
+
+function mergeIntervals(arr) {
+  let sp = 0
+  let fp = 1
+  while (sp < arr.length - 1) {
+    if (arr[sp][1] >= arr[fp][0]) {
+      console.log(`arr[sp]: ${arr[sp]}, arr[fp]: ${arr[fp]}`)
+      arr[sp] = [arr[sp][0], arr[fp][1]]
+      arr.splice(fp, 1)
+      break
+    } else {
+      sp += 1
+      fp += 1
+    }
+  }
+  return arr
+}
+
+console.log(
+  mergeIntervals([
+    [1, 3],
+    [2, 6],
+    [8, 10],
+    [15, 18],
+  ])
+)
