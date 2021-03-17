@@ -12,7 +12,7 @@ Output: [1]
 Input: [0,  1,  2,  0,  1,  0,  1,  2,  2] 
                 m           
             l
-Output: [0, 0, 1, 2, 2]
+Output: [0, 0, 1, 1, 1, 2, 2, 2]
 */
 
 // counting sort => Time O(n log n) Space: 0(N)
@@ -49,6 +49,15 @@ var countingSort = (arr) => {
 
 // low, mid, high pointer solution, aka Dutch National Flag Algo => Time : O(N), Space: O(1)
 
+/*
+                    t                    h
+Input: [0,  0,  1,  1,  1,  0,  1,  2,  2] 
+                l                  
+                        m          
+Output: [0, 0, 1, 1, 1, 2, 2, 2]
+
+
+*/
 var sort = (arr) => {
   let low = 0
   let high = arr.length - 1
@@ -149,4 +158,60 @@ function mergeArr(arr1, arr2) {
   return `arr1: ${arr1}, arr2: ${arr2}`
 }
 
-console.log(mergeArr([1, 2, 3, 5, 8, 9], [20, 15, 10, 13]))
+// Gap algorithm
+function mergeArrGap(arr1, arr2) {
+  let gap = Math.round(arr1.length + arr2.length / 2)
+
+  let newArr = arr1.concat(arr2)
+
+  while (gap > 1) {
+    for (let i = 0; i < newArr.length; i++) {
+      if (newArr[i] > newArr[i + gap]) {
+        let temp = newArr[i + gap]
+        let otherTemp = newArr[i]
+        newArr[i] = temp
+        newArr[i + gap] = otherTemp
+      }
+    }
+    gap / 2
+  }
+  let arrOne = newArr.splice(0, arr1.length)
+  let arrTwo = newArr
+  return `arr1: ${arrOne}, arr2: ${arrTwo}`
+}
+
+/*
+Kadane's algorithm: 
+
+Given an integer in array nums, find the continguous subarray (containing at least one number) which has the largest sum and return its sum. 
+
+Example: 
+Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+Ouput: 6
+Explanation: [4, -1, 2, 1] has the largest sum = 6
+
+*/
+
+// Brute force solution => Time: O(2n) Space O(1)
+function maxSum(arr) {
+  let sp = 0
+  let fp = 1
+  let sum = 0
+  let maxSum = arr[sp]
+
+  while (sp < arr.length) {
+    for (let i = fp; fp < arr.length; fp++) {
+      sum += arr[fp]
+      if (sum > maxSum) {
+        maxSum = sum
+      }
+    }
+    sp++
+    fp = sp + 1
+    sum = arr[sp]
+  }
+
+  return maxSum
+}
+
+console.log(maxSum([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
