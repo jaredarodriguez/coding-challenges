@@ -315,9 +315,9 @@ var duplicateNumber = (arr) => {
   let sp = 0
   let count = 1
   while (sp <= arr.length - 1) {
-    let fp = count
-    for (let i = fp; fp < arr.length; fp++) {
-      if (arr[sp] === arr[fp]) {
+    // let fp = count
+    for (let i = count; count < arr.length; count++) {
+      if (arr[sp] === arr[count]) {
         return arr[sp]
       }
     }
