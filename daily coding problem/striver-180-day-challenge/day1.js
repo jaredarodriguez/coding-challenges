@@ -250,27 +250,80 @@ Explanation: Since intervals [1,3] and [2,6 overlaps], merge them into [1,6]
 // splice the two arrays from the array
 
 function mergeIntervals(arr) {
-  let sp = 0
-  let fp = 1
-  while (sp < arr.length - 1) {
-    if (arr[sp][1] >= arr[fp][0]) {
-      console.log(`arr[sp]: ${arr[sp]}, arr[fp]: ${arr[fp]}`)
-      arr[sp] = [arr[sp][0], arr[fp][1]]
-      arr.splice(fp, 1)
-      break
+  let res = []
+
+  if (arr.length == 0 || arr == null) {
+    return res
+  }
+
+  arr.sort((a, b) => a[0] - b[0])
+
+  console.log(arr)
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i + 1] == null) {
+      res.push(arr[i])
+      return res
+    }
+    if (
+      (arr[i][1] <= arr[i + 1][1] && arr[i][1] >= arr[i + 1][0]) ||
+      arr[i][1] >= arr[i][0]
+    ) {
+      let start = arr[i][0]
+      let end = arr[i + 1][1]
+      res.push([start, end])
+      arr.splice(arr[i + 1], 1)
+    } else if (arr[i][1] >= arr[i + 1][1] && arr[i][0] <= arr[i + 1][0]) {
+      let start = arr[i][0]
+      let end = arr[i][1]
+      res.push([start, end])
+      arr.splice(arr[i + 1], 1)
     } else {
-      sp += 1
-      fp += 1
+      res.push(arr[i])
     }
   }
-  return arr
+
+  return res
 }
 
-console.log(
-  mergeIntervals([
-    [1, 3],
-    [2, 6],
-    [8, 10],
-    [15, 18],
-  ])
-)
+/*
+Find the Duplicate Number
+
+Given an array nums containing n+1 integers where each integer is between 1 and n (inclusive), prove that at least one dupilcate number must exist. Assume that there is one duplicate number, find the duplicate one. 
+
+Example: 
+Input : [1, 3, 4, 2, 2]
+Output: 2
+
+*/
+
+// hash map solution
+var duplicateNumber = (arr) => {
+  let hashMap = {}
+
+  for (let i = 0; i < arr.length; i++) {
+    if (!hashMap[arr[i]]) {
+      hashMap[arr[i]] = 1
+    } else if (hashMap[arr[i]]) {
+      return arr[i]
+    }
+  }
+}
+
+//two pointer solution
+var duplicateNumber = (arr) => {
+  let sp = 0
+  let count = 1
+  while (sp <= arr.length - 1) {
+    let fp = count
+    for (let i = fp; fp < arr.length; fp++) {
+      if (arr[sp] === arr[fp]) {
+        return arr[sp]
+      }
+    }
+    count += 1
+    sp += 1
+  }
+}
+
+console.log(duplicateNumber([1, 3, 2, 8, 1]))
