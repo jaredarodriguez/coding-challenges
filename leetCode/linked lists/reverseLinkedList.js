@@ -11,7 +11,7 @@ Follow up: A linked list can be reversed either iteratively or recursively. Coul
 var reverseList = function (head) {
   let prev = null
   let curr = head
-  let nextTemp = curr.nextTemp
+  let nextTemp = curr.next
 
   while (curr != null) {
     nextTemp = curr.next
