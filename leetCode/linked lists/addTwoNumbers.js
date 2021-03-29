@@ -34,31 +34,78 @@ arrOutput = [8, 9, 9, 9, ]
 
 */
 
-function addTwoNumbers(l1, l2) {
+var addTwoNumbers = (l1, l2) => {
   let sum = 0
-  let current = new ListNode(0)
-  let result = current
+  let carry = 0
+  let curr = new ListNode(0)
+  let dummy = new ListNode(0)
 
   while (l1 || l2) {
-    if (l1) {
-      sum += l1.val
+    sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry
+
+    l1 = l1.next
+    l2 = l2.next
+
+    if (!l1) {
+      sum += l2.val + carry
+      l2 = l2.next
+    }
+    if (!l2) {
+      sum += l1.val + carry
       l1 = l1.next
     }
 
-    if (l2) {
-      sum += l2.val
-      l2 = l2.next
+    if (sum > 9) {
+      sum = sum % 10
+      carry += 1
+    } else {
+      carry = 0
     }
 
-    current.next = new ListNode(sum % 10)
-    current = current.next
+    let temp = new ListNode(0)
+    curr.val = sum
+    curr.next = temp
+    curr = curr.next
 
-    sum = sum > 9 ? 1 : 0
+    if (carry) {
+      let lastTemp = new ListNode(0)
+      curr.val = carry
+      curr.next = lastTemp
+    }
+  }
+  return dummy.next
+}
+
+//
+
+function addTwoNumbers(l1, l2) {
+  let curr = new ListNode(null)
+  let dummy = new ListNode(0, curr)
+  let carry = 0
+
+  while (l1 || l2) {
+    sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry
+    if (sum > 9) {
+      sum = sum % 10
+      carr = Math.floor(sum / 10)
+      tmpNode = curr
+      curr.val = sum
+      curr.next = tmpNode
+      curr = tmpNode
+    } else {
+      tmpNode = curr
+      curr.val = sum + carry
+      curr.next = tmpNode
+      curr = tmpNode
+    }
+    l1 ? (l1 = l1.next) : (l1 = null)
+    l2 ? (l2 = l2.next) : (l1 = null)
   }
 
-  if (sum) {
-    current.next = new ListNode(sum)
+  if (carry) {
+    tmpNode = curr
+    curr.val = carry
+    curr.next = tmpNode
   }
-
-  return result.next
+  return dummy.next
 }
