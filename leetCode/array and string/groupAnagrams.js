@@ -5,39 +5,46 @@ Given an array of strings strs, group the anagrams together. You can return the 
 */
 
 var groupAnagrams = function (strs) {
-  // find charCode of each word
-  var charCode = (word) => {
-    let count = 0
-    for (let i = 0; i < word.length; i++) {
-      count += word.charCodeAt(i)
+  const groups = {}
+
+  for (let i = 0; i < strs.length; i++) {
+    let sort = strs[i].split('').sort().join('')
+
+    if (!groups[sort]) {
+      groups[sort] = [strs[i]]
+    } else {
+      groups[sort].push(strs[i])
     }
-    return count
   }
 
-  let output = []
-  let curr = 0
-  let runner = 1
-
-  while (curr < strs.length) {
-    let matchArr = []
-    for (let i = runner; runner < strs.length; runner++) {
-      console.log(
-        `strs[curr]  & charCode: ${strs[curr]} & ${charCode(strs[curr])}`
-      )
-      console.log(
-        `strs[runner] & charCode: ${strs[runner]} & ${charCode(
-          strs[runner]
-        )} \n`
-      )
-      if (charCode(strs[curr]) == charCode(strs[runner])) {
-        matchArr.push(strs[runner])
-      }
-    }
-    runner += 1
-    curr += 1
-    output.push(matchArr)
-  }
-  //   return output
+  return Object.values(groups)
 }
 
 console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']))
+
+// const charCode = (word) => {
+//   let sum = 0
+//   for (let i = 0; i < word.length; i++) {
+//     sum += word.charCodeAt(i)
+//   }
+//   return sum
+// }
+
+// let matchStrs = []
+// let curr = 0
+
+// while (curr < strs.length && strs.length) {
+//   if (strs.length === 1) {
+//     matchStrs.push(strs[0])
+//     strs.splice(0, 1)
+//   }
+//   let curr = 0
+//   for (let i = curr; curr < strs.length; curr++) {
+//     if (charCode(strs[curr]) === charCode(strs[curr + 1])) {
+//       matchStrs.push(charCode(strs[curr + 1]))
+//       strs.splice(strs[curr + 1], 1)
+//     }
+//     curr += 1
+//   }
+// }
+// return matchStrs
