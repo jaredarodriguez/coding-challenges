@@ -1,10 +1,4 @@
 class Node {
-    constuctor(val) {
-        this.val = val
-    }
-}
-
-class BST {
   constructor(val) {
     this.val = val
     this.left = null;
@@ -13,18 +7,31 @@ class BST {
 
   insert(val) {
     if (val < this.val && !this.left) {
-      this.left= new BST(val);
+      this.left= new Node(val);
     } else if (val < this.val && this.left) {
       this.left.insert(val);
     } else if (val > this.val && !this.right) {
-      this.right = new BST(val);
+      this.right = new Node(val);
     } else if (val > this.val && this.right) {
       this.right.insert(val);
     }
   }
+
+  search(element) {
+      if(this.val === element){
+          return true
+      } else if (this.val > element && this.left) {
+          return this.left.search(element)
+      } else if (this.val < element && this.right) {
+          return this.right.search(element)
+      }
+
+      return false
+    //   element does not exist in the tree
+  }
 }
 
-let rootNode = new BST(10)
+let rootNode = new Node(10)
 rootNode.insert(8)
 rootNode.insert(11)
 rootNode.insert(6)
