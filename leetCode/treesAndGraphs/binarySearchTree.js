@@ -1,4 +1,4 @@
-class Node {
+class BST {
   constructor(val) {
     this.val = val
     this.left = null;
@@ -7,11 +7,11 @@ class Node {
 
   insert(val) {
     if (val < this.val && !this.left) {
-      this.left= new Node(val);
+      this.left= new BST(val);
     } else if (val < this.val && this.left) {
       this.left.insert(val);
     } else if (val > this.val && !this.right) {
-      this.right = new Node(val);
+      this.right = new BST(val);
     } else if (val > this.val && this.right) {
       this.right.insert(val);
     }
@@ -31,8 +31,7 @@ class Node {
   }
 }
 
-let rootNode = new Node(10)
-rootNode.insert(8)
-rootNode.insert(11)
-rootNode.insert(6)
-console.log(rootNode)
+module.exports = {
+  BST : BST
+}
+
